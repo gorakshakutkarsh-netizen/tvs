@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TVS Motor | Apache & Racing Heritage</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    :root {
+      --tvs-red: #d9232d;
+      --tvs-dark-red: #a81921;
+      --bg-dark: #0b0c10;
+      --bg-card: #15171e;
+      --text-light: #ffffff;
+      --text-muted: #94a3b8;
+      --accent-yellow: #f59e0b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand-font {
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation Bar */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(11, 12, 16, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(217, 35, 45, 0.2);
+      z-index: 1000;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--tvs-red);
+    }
+
+    /* Brand Logo Container */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-text {
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .logo-text span {
+      color: var(--tvs-red);
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-icons i {
+      color: var(--text-light);
+      cursor: pointer;
+      transition: color 0.3s;
+      width: 22px;
+      height: 22px;
+    }
+
+    .nav-icons i:hover {
+      color: var(--tvs-red);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(to right, rgba(11, 12, 16, 0.9) 30%, rgba(11, 12, 16, 0.3)),
+                  url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      padding: 0 8%;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .hero-subtitle {
+      color: var(--tvs-red);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 35px;
+    }
+
+    .btn-red {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background-color: var(--tvs-red);
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      border: none;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .btn-red:hover {
+      background-color: var(--tvs-dark-red);
+      transform: translateY(-2px);
+    }
+
+    /* Bike Collection Section */
+    .collection {
+      padding: 100px 8%;
+      text-align: center;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .section-header span {
+      color: var(--tvs-red);
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .section-header h2 {
+      font-size: 2.8rem;
+      margin-top: 5px;
+    }
+
+    .bike-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 35px;
+    }
+
+    .bike-card {
+      background-color: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.4s ease, border-color 0.4s ease;
+      text-align: left;
+    }
+
+    .bike-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--tvs-red);
+    }
+
+    .bike-img-wrapper {
+      height: 260px;
+      overflow: hidden;
+      position: relative;
+      background: #111;
+    }
+
+    .bike-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .bike-card:hover .bike-img-wrapper img {
+      transform: scale(1.06);
+    }
+
+    .bike-info {
+      padding: 25px;
+    }
+
+    .bike-series {
+      color: var(--tvs-red);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .bike-name {
+      font-size: 1.5rem;
+      margin: 6px 0;
+    }
+
+    .bike-specs {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .bike-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 15px;
+    }
+
+    .bike-price {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .bike-link {
+      color: var(--tvs-red);
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Technology / Features Bar */
+    .features {
+      background-color: #12141a;
+      padding: 80px 8%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px;
+      text-align: center;
+      border-top: 1px solid rgba(217, 35, 45, 0.2);
+      border-bottom: 1px solid rgba(217, 35, 45, 0.2);
+    }
+
+    .feature-box i {
+      color: var(--tvs-red);
+      width: 40px;
+      height: 40px;
+      margin-bottom: 15px;
+    }
+
+    .feature-box h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .feature-box p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 8% 30px;
+      background-color: #07080a;
+      text-align: center;
+    }
+
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin: 25px 0;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--tvs-red);
+    }
+
+    .copyright {
+      color: #555;
+      font-size: 0.75rem;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hero-title {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <!-- Custom SVG TVS Logo with Racing Horse Icon -->
+    <a href="#" class="logo-container">
+      <svg width="42" height="42" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shield Background -->
+        <path d="M50 5 L90 20 L90 55 C90 75 72 90 50 95 C28 90 10 75 10 55 L10 20 Z" fill="#0b0c10" stroke="#D9232D" stroke-width="6"/>
+        <!-- Racing Horse Head Silhouette -->
+        <path d="M65 30 C60 30 52 35 48 42 C45 40 42 38 38 42 C35 45 34 52 38 60 C40 64 45 70 52 72 C55 73 58 70 56 65 C54 60 55 55 58 52 C61 49 68 46 72 38 C74 34 70 30 65 30 Z" fill="#D9232D"/>
+        <!-- Speed Accent Lines -->
+        <path d="M25 50 H33" stroke="#D9232D" stroke-width="4" stroke-linecap="round"/>
+        <path d="M22 60 H30" stroke="#D9232D" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-text">TVS<span>.</span></div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#bikes">Motorcycles</a></li>
+      <li><a href="#scooters">Scooters</a></li>
+      <li><a href="#racing">Racing</a></li>
+      <li><a href="#service">Service</a></li>
+    </ul>
+
+    <div class="nav-icons">
+      <i data-lucide="search" title="Search"></i>
+      <i data-lucide="map-pin" title="Find a Dealer"></i>
+      <i data-lucide="user" title="Account"></i>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-subtitle">Track to Road DNA</span>
+      <h1 class="hero-title">Apache RTR 310</h1>
+      <p class="hero-desc">
+        Born from the race track. Equipped with aggressive naked streetfighter styling, advanced ride modes, bi-directional quickshifter, and uncompromised power.
+      </p>
+      <a href="#bikes" class="btn-red">
+        Explore Range
+        <i data-lucide="arrow-right" style="width:18px; height:18px;"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Bike Collection Section -->
+  <section class="collection" id="bikes">
+    <div class="section-header">
+      <span>Power & Performance</span>
+      <h2>The TVS Lineup</h2>
+    </div>
+
+    <div class="bike-grid">
+      <!-- Bike 1 -->
+      <div class="bike-card">
+        <div class="bike-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80" alt="TVS Apache RTR 160 4V">
+        </div>
+        <div class="bike-info">
+          <span class="bike-series">Apache Series</span>
+          <h3 class="bike-name">Apache RTR 160 4V</h3>
+          <p class="bike-specs">159.7 cc, Oil-cooled, Race Tuned Fuel Injection</p>
+          <div class="bike-footer">
+            <span class="bike-price">₹1,25,000</span>
+            <a href="#" class="bike-link">Configure <i data-lucide="chevron-right" style="width:16px;"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bike 2 -->
+      <div class="bike-card">
+        <div class="bike-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1609630875176-b8007bad32ef?auto=format&fit=crop&w=800&q=80" alt="TVS Apache RR 310">
+        </div>
+        <div class="bike-info">
+          <span class="bike-series">Flagship Supersport</span>
+          <h3 class="bike-name">Apache RR 310</h3>
+          <p class="bike-specs">312.2 cc, Reverse Inclined Engine, Liquid Cooled</p>
+          <div class="bike-footer">
+            <span class="bike-price">₹2,75,000</span>
+            <a href="#" class="bike-link">Configure <i data-lucide="chevron-right" style="width:16px;"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bike 3 -->
+      <div class="bike-card">
+        <div class="bike-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1558980664-3a031cf67ea8?auto=format&fit=crop&w=800&q=80" alt="TVS Raider 125">
+        </div>
+        <div class="bike-info">
+          <span class="bike-series">Sport Commuter</span>
+          <h3 class="bike-name">TVS Raider 125</h3>
+          <p class="bike-specs">124.8 cc, ET-Fi Technology, SmartXonnect</p>
+          <div class="bike-footer">
+            <span class="bike-price">₹95,000</span>
+            <a href="#" class="bike-link">Configure <i data-lucide="chevron-right" style="width:16px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Highlights -->
+  <section class="features" id="racing">
+    <div class="feature-box">
+      <i data-lucide="zap"></i>
+      <h3>SmartXonnect</h3>
+      <p>Bluetooth-enabled cluster with turn-by-turn navigation and race telemetry.</p>
+    </div>
+    <div class="feature-box">
+      <i data-lucide="shield"></i>
+      <h3>Dual Channel ABS</h3>
+      <p>Precision braking control built for maximum stability on any terrain.</p>
+    </div>
+    <div class="feature-box">
+      <i data-lucide="gauge"></i>
+      <h3>Race Tuned Fuel Injection</h3>
+      <p>Engineered for instant throttle response and high power delivery.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5 L90 20 L90 55 C90 75 72 90 50 95 C28 90 10 75 10 55 L10 20 Z" fill="#0b0c10" stroke="#D9232D" stroke-width="6"/>
+        <path d="M65 30 C60 30 52 35 48 42 C45 40 42 38 38 42 C35 45 34 52 38 60 C40 64 45 70 52 72 C55 73 58 70 56 65 C54 60 55 55 58 52 C61 49 68 46 72 38 C74 34 70 30 65 30 Z" fill="#D9232D"/>
+      </svg>
+      <span style="font-family:'Rajdhani'; font-weight:700; font-size:1.4rem; letter-spacing:2px;">TVS MOTOR</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#">Apache Series</a></li>
+      <li><a href="#">Jupiter Scooters</a></li>
+      <li><a href="#">Electric Vehicles (iQube)</a></li>
+      <li><a href="#">Find a Dealership</a></li>
+      <li><a href="#">TVS Racing</a></li>
+    </ul>
+    <p class="copyright">Designed for educational and portfolio demonstration purposes. TVS and the associated logos are registered trademarks of TVS Motor Company.</p>
+  </footer>
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
